@@ -1,9 +1,11 @@
-# 💀 Dead Man 💀
+# 💀 Dead Man v1.1 💀
 
 > **For the truly paranoid among us** 🕵️  
 > *Because sometimes you need a fail-safe that doesn't require trust in anyone but yourself.*
 
 A Windows-based automatic data destruction system that triggers after X days without login.
+
+**✨ NEW in v1.1:** Now includes `DeadMan.exe` launcher - just double-click to start!
 
 ![Dead Man Control Panel](screenshot.png)
 
@@ -43,10 +45,10 @@ This tool is for the **truly paranoid** - people who:
 
 ```
 DeadMan/
-├── config/               # Configuration files (not in repo)
+├── config/               # Configuration files (auto-created)
 │   ├── config.json
 │   └── last_login.txt
-├── logs/                 # Log files (not in repo)
+├── logs/                 # Log files (auto-created)
 │   └── log.txt
 ├── scripts/              # PowerShell scripts
 │   ├── gui-config.ps1
@@ -54,9 +56,8 @@ DeadMan/
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
 ├── bart.gif              # Our dancing Bart! 🎭
-├── start.bat             # Start GUI (Double-click!)
-├── install.bat           # Installation (as Admin)
-├── create-shortcut.ps1   # Creates desktop shortcut
+├── DeadMan.exe           # ⭐ NEW: Main launcher (double-click!)
+├── DeadMan.ps1           # PowerShell launcher
 ├── .gitignore
 └── README.md
 ```
@@ -70,29 +71,35 @@ DeadMan/
 
 ### Step-by-Step Guide
 
-1. **Clone or download repository**
+1. **Download and extract**
+   - Download `DeadMan-v2.0.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
+   - Extract to a folder (e.g., `C:\DeadMan`)
+
+   OR clone from repository:
    ```bash
    git clone https://github.com/iamrealguexoxo/DeadMan.git
    cd DeadMan
    ```
 
 2. **Run installation**
-   - Right-click on `install.bat`
-   - Select "Run as administrator"
+   - Double-click `DeadMan.exe`
+   - Select **[2] Install** from the menu
+   - Confirm UAC prompt (Administrator required)
    - The script will create:
      - Two Windows Scheduled Tasks
      - Folder structure (config/, logs/)
      - Initial last_login.txt
 
 3. **Configuration**
-   - Run `start.bat` (double-click)
+   - Run `DeadMan.exe` again
+   - Select **[1] GUI** from the menu
    - The Control Panel will open
 
 ## 🎮 Usage
 
 ### Initial Configuration
 
-1. **Start Control Panel**: Run `start.bat`
+1. **Start Control Panel**: Run `DeadMan.exe` → Select [1] GUI
 2. **Set days**: Number of days without login (default: 30)
 3. **Safe Mode**: ⚠️ **KEEP ENABLED** for testing!
 4. **Add items**:
