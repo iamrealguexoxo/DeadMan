@@ -79,45 +79,44 @@ DeadMan/
 - PowerShell 5.1 or higher
 - Administrator rights for installation
 
-### Step-by-Step Guide
+### Quick Install (Recommended) 🎯
 
 1. **Download and extract**
-   - Download `DeadMan-v1.1.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
-   - Extract to a folder (e.g., `C:\DeadMan`)
+   - Download `DeadMan-v1.1-Installer.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
+   - Extract to any folder
 
-   OR clone from repository:
-   ```bash
-   git clone https://github.com/iamrealguexoxo/DeadMan.git
-   cd DeadMan
-   ```
+2. **Run installer**
+   - Double-click **`install.bat`**
+   - The installer will:
+     - ✅ Copy all files to `C:\DeadMan`
+     - ✅ Create desktop shortcut "Dead Man"
+     - ✅ Optionally install Windows Tasks
+   
+3. **Start using**
+   - Double-click **"Dead Man"** on your Desktop
+   - Select **[1] GUI** to configure
 
-2. **Run installation**
-   
-   **Option A: Using EXE (Recommended)**
-   - Double-click `DeadMan.exe`
-   - Select **[2] Install** from the menu
-   - Confirm UAC prompt (Administrator required)
-   
-   **Option B: Using PowerShell directly**
-   - Right-click `install.bat` and select "Run as administrator"
-   - OR run: `powershell -ExecutionPolicy Bypass -File ".\scripts\setup-tasks.ps1"`
-   
-   The installation creates:
-   - Two Windows Scheduled Tasks
-   - Folder structure (config/, logs/)
-   - Initial last_login.txt
+### Manual Installation (Advanced)
 
-3. **Configuration**
-   
-   **Option A: Using EXE**
-   - Run `DeadMan.exe` again
-   - Select **[1] GUI** from the menu
-   
-   **Option B: Using Scripts**
-   - Double-click `start.bat`
-   - OR run: `powershell -ExecutionPolicy Bypass -File ".\DeadMan.ps1" -GUI`
-   
-   The Control Panel will open
+**Option A: Clone from GitHub**
+```bash
+git clone https://github.com/iamrealguexoxo/DeadMan.git C:\DeadMan
+cd C:\DeadMan
+```
+
+**Option B: Download ZIP**
+- Download `DeadMan-v1.1.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
+- Extract to `C:\DeadMan`
+
+**Install Windows Tasks:**
+- Double-click `DeadMan.exe` → Select **[2] Install**
+- OR right-click `install.bat` → "Run as administrator"
+
+**Create Desktop Shortcut:**
+- Right-click `create-shortcut.ps1` → "Run with PowerShell"
+
+**Launch:**
+- Double-click `DeadMan.exe` or `start.bat`
 
 ## 🎮 Usage
 
