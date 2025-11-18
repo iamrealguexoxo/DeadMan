@@ -9,6 +9,11 @@ A Windows-based automatic data destruction system that triggers after X days wit
 
 ![Dead Man Control Panel](screenshot.png)
 
+## 🚀 Two Ways to Use
+
+**🎯 For Regular Users** → Use `DeadMan.exe` (simpler, interactive menu)  
+**👨‍💻 For Developers/Purists** → Use PowerShell scripts directly (`DeadMan.ps1` or `.bat` files)
+
 **[Deutsche Version / German Version](README_DE.md)**
 
 ## ⚠️ WARNING
@@ -72,7 +77,7 @@ DeadMan/
 ### Step-by-Step Guide
 
 1. **Download and extract**
-   - Download `DeadMan-v2.0.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
+   - Download `DeadMan-v1.1.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
    - Extract to a folder (e.g., `C:\DeadMan`)
 
    OR clone from repository:
@@ -82,24 +87,40 @@ DeadMan/
    ```
 
 2. **Run installation**
+   
+   **Option A: Using EXE (Recommended)**
    - Double-click `DeadMan.exe`
    - Select **[2] Install** from the menu
    - Confirm UAC prompt (Administrator required)
-   - The script will create:
-     - Two Windows Scheduled Tasks
-     - Folder structure (config/, logs/)
-     - Initial last_login.txt
+   
+   **Option B: Using PowerShell directly**
+   - Right-click `install.bat` and select "Run as administrator"
+   - OR run: `powershell -ExecutionPolicy Bypass -File ".\scripts\setup-tasks.ps1"`
+   
+   The installation creates:
+   - Two Windows Scheduled Tasks
+   - Folder structure (config/, logs/)
+   - Initial last_login.txt
 
 3. **Configuration**
+   
+   **Option A: Using EXE**
    - Run `DeadMan.exe` again
    - Select **[1] GUI** from the menu
-   - The Control Panel will open
+   
+   **Option B: Using Scripts**
+   - Double-click `start.bat`
+   - OR run: `powershell -ExecutionPolicy Bypass -File ".\DeadMan.ps1" -GUI`
+   
+   The Control Panel will open
 
 ## 🎮 Usage
 
 ### Initial Configuration
 
-1. **Start Control Panel**: Run `DeadMan.exe` → Select [1] GUI
+1. **Start Control Panel**
+   - **With EXE**: Run `DeadMan.exe` → Select [1] GUI
+   - **With Scripts**: Run `start.bat` or `DeadMan.ps1 -GUI`
 2. **Set days**: Number of days without login (default: 30)
 3. **Safe Mode**: ⚠️ **KEEP ENABLED** for testing!
 4. **Add items**:
