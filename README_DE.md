@@ -1,8 +1,20 @@
-# 💀 Dead Man Switch 💀
+# 💀 Dead Man v1.1 💀
+
+> **Für die wirklich Paranoiden unter uns** 🕵️  
+> *Manchmal braucht man ein Fail-Safe, das niemandem außer dir selbst vertraut.*
 
 Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer bestimmten Anzahl von Tagen ohne Login ausgelöst wird.
 
-![Dead Man Switch Control Panel](screenshot.png)
+**✨ NEU in v1.1:** Jetzt mit `DeadMan.exe` Launcher - einfach doppelklicken!
+
+![Dead Man Control Panel](screenshot.png)
+
+**[English Version](README.md)**
+
+## 🚀 Zwei Wege zur Nutzung
+
+**🎯 Für normale User** → `DeadMan.exe` nutzen (einfacher, interaktives Menü)  
+**👨‍💻 Für Entwickler/Puristen** → PowerShell Scripts direkt (`DeadMan.ps1` oder `.bat` Dateien)
 
 ## ⚠️ WARNUNG
 
@@ -24,10 +36,10 @@ Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer best
 
 ```
 DeadMan/
-├── config/               # Konfigurationsdateien (nicht in Git)
+├── config/               # Konfigurationsdateien (auto-erstellt)
 │   ├── config.json
 │   └── last_login.txt
-├── logs/                 # Log-Dateien (nicht in Git)
+├── logs/                 # Log-Dateien (auto-erstellt)
 │   └── log.txt
 ├── scripts/              # PowerShell Scripts
 │   ├── gui-config.ps1
@@ -35,8 +47,8 @@ DeadMan/
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
 ├── bart.gif              # Unser tanzender Bart! 🎭
-├── start.bat             # GUI starten (Doppelklick!)
-├── install.bat           # Installation (als Admin)
+├── DeadMan.exe           # ⭐ NEU: Haupt-Launcher (Doppelklick!)
+├── DeadMan.ps1           # PowerShell Launcher
 ├── .gitignore
 └── README.md
 ```
@@ -50,29 +62,51 @@ DeadMan/
 
 ### Schritt-für-Schritt Anleitung
 
-1. **Repository klonen oder herunterladen**
+1. **Download und Entpacken**
+   - Lade `DeadMan-v1.1.zip` von [Releases](https://github.com/iamrealguexoxo/DeadMan/releases) herunter
+   - Entpacke in einen Ordner (z.B. `C:\DeadMan`)
+
+   ODER klone das Repository:
    ```bash
-   git clone https://github.com/iamrealguexoxo/DeadManSwitch.git
-   cd DeadManSwitch
+   git clone https://github.com/iamrealguexoxo/DeadMan.git
+   cd DeadMan
    ```
 
 2. **Installation durchführen**
-   - Rechtsklick auf `install.bat`
-   - "Als Administrator ausführen" wählen
-   - Das Script erstellt:
-     - Zwei Windows Scheduled Tasks
-     - Ordnerstruktur (config/, logs/)
-     - Initiale last_login.txt
+   
+   **Option A: Mit EXE (Empfohlen)**
+   - Doppelklick auf `DeadMan.exe`
+   - Wähle **[2] Install** aus dem Menü
+   - UAC Prompt bestätigen (Administrator erforderlich)
+   
+   **Option B: Mit PowerShell direkt**
+   - Rechtsklick auf `install.bat` → "Als Administrator ausführen"
+   - ODER: `powershell -ExecutionPolicy Bypass -File ".\scripts\setup-tasks.ps1"`
+   
+   Die Installation erstellt:
+   - Zwei Windows Scheduled Tasks
+   - Ordnerstruktur (config/, logs/)
+   - Initiale last_login.txt
 
 3. **Konfiguration**
-   - Starte `start.bat` (Doppelklick)
-   - Das Control Panel öffnet sich
+   
+   **Option A: Mit EXE**
+   - Starte `DeadMan.exe` erneut
+   - Wähle **[1] GUI** aus dem Menü
+   
+   **Option B: Mit Scripts**
+   - Doppelklick auf `start.bat`
+   - ODER: `powershell -ExecutionPolicy Bypass -File ".\DeadMan.ps1" -GUI`
+   
+   Das Control Panel öffnet sich
 
 ## 🎮 Verwendung
 
 ### Erstkonfiguration
 
-1. **Control Panel starten**: `start.bat` ausführen
+1. **Control Panel starten**
+   - **Mit EXE**: `DeadMan.exe` → Wähle [1] GUI
+   - **Mit Scripts**: `start.bat` oder `DeadMan.ps1 -GUI`
 2. **Tage einstellen**: Anzahl der Tage ohne Login (Standard: 30)
 3. **Safe Mode**: ⚠️ **AKTIVIERT LASSEN** für Tests!
 4. **Items hinzufügen**:
