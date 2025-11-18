@@ -1,0 +1,42 @@
+# Dead Man Switch - Git Ignore
+
+# Config files (contain sensitive paths and user data)
+config/
+!config/.gitkeep
+
+# Log files
+logs/
+!logs/.gitkeep
+
+# User-specific files
+last_login.txt
+log.txt
+config.json
+
+# Screenshots (keep example, ignore user screenshots)
+screenshot_*.png
+screenshot_*.jpg
+
+# Windows shortcuts
+*.lnk
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PowerShell
+*.ps1xml
+
+# System files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
