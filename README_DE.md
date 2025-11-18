@@ -7,7 +7,7 @@ Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer best
 
 **✨ NEU in v1.1:** Jetzt mit `DeadMan.exe` Launcher - einfach doppelklicken!
 
-![Dead Man Control Panel](screenshot.png)
+![Dead Man Control Panel](media/screenshot.png)
 
 **[English Version](README.md)**
 
@@ -41,15 +41,20 @@ DeadMan/
 │   └── last_login.txt
 ├── logs/                 # Log-Dateien (auto-erstellt)
 │   └── log.txt
+├── media/                # Medien-Dateien
+│   ├── bart.gif          # Unser tanzender Bart! 🎭
+│   └── screenshot.png    # GUI Screenshot
+├── release/              # Release-Builds (nicht in Repo)
+│   └── DeadMan-v1.1.zip
 ├── scripts/              # PowerShell Scripts
 │   ├── gui-config.ps1
 │   ├── setup-tasks.ps1
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
-├── bart.gif              # Unser tanzender Bart! 🎭
-├── DeadMan.exe           # ⭐ NEU: Haupt-Launcher (Doppelklick!)
+├── DeadMan.exe           # ⭐ Haupt-Launcher (Doppelklick!)
 ├── DeadMan.ps1           # PowerShell Launcher
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 

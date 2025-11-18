@@ -8,6 +8,10 @@ config/
 logs/
 !logs/.gitkeep
 
+# Release builds (ZIPs are uploaded to GitHub Releases)
+release/
+*.zip
+
 # User-specific files
 last_login.txt
 log.txt

@@ -180,7 +180,7 @@ function Show-AboutDialog {
     $picBart.SizeMode = "Zoom"
     $picBart.BackColor = [System.Drawing.Color]::Black
     
-    $bartGifPath = Join-Path (Split-Path -Parent $scriptDir) "bart.gif"
+    $bartGifPath = Join-Path (Split-Path -Parent $scriptDir) "media\bart.gif"
     if (Test-Path $bartGifPath) {
         $picBart.Image = [System.Drawing.Image]::FromFile($bartGifPath)
     }

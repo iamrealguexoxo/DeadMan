@@ -7,7 +7,7 @@ A Windows-based automatic data destruction system that triggers after X days wit
 
 **✨ NEW in v1.1:** Now includes `DeadMan.exe` launcher - just double-click to start!
 
-![Dead Man Control Panel](screenshot.png)
+![Dead Man Control Panel](media/screenshot.png)
 
 ## 🚀 Two Ways to Use
 
@@ -55,15 +55,20 @@ DeadMan/
 │   └── last_login.txt
 ├── logs/                 # Log files (auto-created)
 │   └── log.txt
+├── media/                # Media files
+│   ├── bart.gif          # Our dancing Bart! 🎭
+│   └── screenshot.png    # GUI screenshot
+├── release/              # Release builds (not in repo)
+│   └── DeadMan-v1.1.zip
 ├── scripts/              # PowerShell scripts
 │   ├── gui-config.ps1
 │   ├── setup-tasks.ps1
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
-├── bart.gif              # Our dancing Bart! 🎭
-├── DeadMan.exe           # ⭐ NEW: Main launcher (double-click!)
+├── DeadMan.exe           # ⭐ Main launcher (double-click!)
 ├── DeadMan.ps1           # PowerShell launcher
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
