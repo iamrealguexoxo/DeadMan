@@ -45,8 +45,10 @@ Write-Log "=== Dead Man Switch Check gestartet ==="
 
 # Prüfen, ob config.json existiert
 if (-not (Test-Path $configPath)) {
-    Write-Log "FEHLER: config.json nicht gefunden unter $configPath"
-    exit 1
+    Write-Log "WARNUNG: config.json nicht gefunden unter $configPath"
+    Write-Log "Bitte zuerst die GUI oeffnen und Konfiguration speichern, oder Installation erneut ausfuehren."
+    Write-Log "Dead Man Switch Check wird beendet."
+    exit 0
 }
 
 # Config laden

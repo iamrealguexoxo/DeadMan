@@ -125,6 +125,26 @@ $timestamp = Get-Date
 $timestamp.ToString("o") | Set-Content $lastLoginPath -Force
 Write-Host "last_login.txt erstellt: $timestamp" -ForegroundColor Green
 
+# Default config.json erstellen falls nicht vorhanden
+Write-Host ""
+Write-Host "=== Initiale config.json wird erstellt ===" -ForegroundColor Cyan
+Write-Host ""
+
+$configJsonPath = Join-Path $root "config\config.json"
+if (-not (Test-Path $configJsonPath)) {
+    $defaultConfig = @{
+        DaysWithoutLogin = 30
+        SafeMode = $true
+        Executed = $false
+        ExecutedAt = $null
+        Items = @()
+    }
+    $defaultConfig | ConvertTo-Json -Depth 5 | Set-Content $configJsonPath -Force
+    Write-Host "config.json erstellt mit Default-Einstellungen (30 Tage, Safe Mode aktiviert)" -ForegroundColor Green
+} else {
+    Write-Host "config.json existiert bereits" -ForegroundColor Yellow
+}
+
 # Zusammenfassung
 Write-Host ""
 Write-Host "=== Setup abgeschlossen ===" -ForegroundColor Green
