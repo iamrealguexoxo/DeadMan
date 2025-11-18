@@ -165,7 +165,7 @@ function Remove-Item-FromList {
 # ===================================================================
 function Show-AboutDialog {
     $aboutForm = New-Object System.Windows.Forms.Form
-    $aboutForm.Text = "About Dead Man Switch"
+    $aboutForm.Text = "About Dead Man - by iamrealguexoxo"
     $aboutForm.Size = New-Object System.Drawing.Size(500, 600)
     $aboutForm.StartPosition = "CenterParent"
     $aboutForm.FormBorderStyle = "FixedDialog"
@@ -246,7 +246,7 @@ function Show-AboutDialog {
     
     # Title
     $lblTitle = New-Object System.Windows.Forms.Label
-    $lblTitle.Text = "💀 DEAD MAN SWITCH 💀"
+    $lblTitle.Text = "💀 DEAD MAN 💀"
     $lblTitle.Font = New-Object System.Drawing.Font("Segoe UI", 16, [System.Drawing.FontStyle]::Bold)
     $lblTitle.ForeColor = [System.Drawing.Color]::Red
     $lblTitle.Location = New-Object System.Drawing.Point(10, 10)
@@ -323,7 +323,7 @@ function Show-AboutDialog {
 function Show-GUI {
     # Main Form
     $form = New-Object System.Windows.Forms.Form
-    $form.Text = "Dead Man Switch - Control Panel"
+    $form.Text = "Dead Man - by iamrealguexoxo"
     $form.Size = New-Object System.Drawing.Size(720, 470)
     $form.StartPosition = "CenterScreen"
     $form.FormBorderStyle = "FixedDialog"

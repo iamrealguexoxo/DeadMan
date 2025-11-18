@@ -5,7 +5,7 @@ REM ===================================================================
 REM Starts the Dead Man Switch Configuration GUI
 REM ===================================================================
 
-title Dead Man Switch - Control Panel
+title Dead Man - by iamrealguexoxo
 
 REM Check if running as Administrator
 net session >nul 2>&1
@@ -21,7 +21,7 @@ REM Navigate to script directory
 cd /d "%~dp0"
 
 REM Start the GUI
-echo Starting Dead Man Switch Control Panel...
+echo Starting Dead Man Control Panel...
 powershell.exe -ExecutionPolicy Bypass -File "%~dp0scripts\gui-config.ps1"
 
 if %errorlevel% neq 0 (

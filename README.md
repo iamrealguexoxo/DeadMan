@@ -1,159 +1,179 @@
-# 💀 Dead Man Switch 💀
+# 💀 Dead Man 💀
 
-Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer bestimmten Anzahl von Tagen ohne Login ausgelöst wird.
+> **For the truly paranoid among us** 🕵️  
+> *Because sometimes you need a fail-safe that doesn't require trust in anyone but yourself.*
 
-![Dead Man Switch Control Panel](screenshot.png)
+A Windows-based automatic data destruction system that triggers after X days without login.
 
-## ⚠️ WARNUNG
+![Dead Man Control Panel](screenshot.png)
 
-**BENUTZUNG AUF EIGENE GEFAHR!** Dieses Tool kann dauerhaft Daten löschen. Teste **IMMER** zuerst im Safe Mode und erstelle Backups wichtiger Daten!
+**[Deutsche Version / German Version](README_DE.md)**
+
+## ⚠️ WARNING
+
+**USE AT YOUR OWN RISK!** This tool can permanently delete your data. **ALWAYS** test in Safe Mode first and create backups of important data!
 
 ## 🎯 Features
 
-- **Automatischer Trigger**: Aktiviert sich nach X Tagen ohne Login
-- **Safe Mode**: Teste das System ohne tatsächliche Löschung (Simulation)
-- **Mehrere Lösch-Typen**:
-  - Plain Dateien und Ordner
-  - VeraCrypt Container und Keyfiles
-  - BitLocker Recovery Keys
-- **GUI Control Panel**: Einfach zu bedienende Konfigurationsoberfläche
-- **Windows Tasks**: Automatische Überwachung bei Systemstart und Login
-- **About-Dialog**: Mit tanzenden Bart! 🕺
+- **Automatic Trigger**: Activates after X days without login
+- **Safe Mode**: Test the system without actual deletion (simulation)
+- **Multiple Deletion Types**:
+  - Plain files and folders
+  - VeraCrypt containers and keyfiles
+  - BitLocker recovery keys
+- **GUI Control Panel**: Easy-to-use configuration interface
+- **Windows Tasks**: Automatic monitoring on system startup and login
+- **About Dialog**: With dancing Bart! 🕺
 
-## 📁 Projektstruktur
+## 🕵️ Who is this for?
+
+This tool is for the **truly paranoid** - people who:
+- Need a fail-safe in case of emergencies
+- Don't trust cloud services with sensitive data
+- Want full control over their data destruction
+- Need plausible deniability (Safe Mode looks like the real thing)
+- Understand the responsibility that comes with such power
+
+**Not recommended for:**
+- People who forget their passwords regularly
+- Casual users who just want "some security"
+- Anyone who doesn't fully understand what this does
+
+## 📁 Project Structure
 
 ```
 DeadMan/
-├── config/               # Konfigurationsdateien (nicht in Git)
+├── config/               # Configuration files (not in repo)
 │   ├── config.json
 │   └── last_login.txt
-├── logs/                 # Log-Dateien (nicht in Git)
+├── logs/                 # Log files (not in repo)
 │   └── log.txt
-├── scripts/              # PowerShell Scripts
+├── scripts/              # PowerShell scripts
 │   ├── gui-config.ps1
 │   ├── setup-tasks.ps1
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
-├── bart.gif              # Unser tanzender Bart! 🎭
-├── start.bat             # GUI starten (Doppelklick!)
-├── install.bat           # Installation (als Admin)
+├── bart.gif              # Our dancing Bart! 🎭
+├── start.bat             # Start GUI (Double-click!)
+├── install.bat           # Installation (as Admin)
+├── create-shortcut.ps1   # Creates desktop shortcut
 ├── .gitignore
 └── README.md
 ```
 
 ## 🚀 Installation
 
-### Voraussetzungen
+### Prerequisites
 - Windows 10/11
-- PowerShell 5.1 oder höher
-- Administrator-Rechte für die Installation
+- PowerShell 5.1 or higher
+- Administrator rights for installation
 
-### Schritt-für-Schritt Anleitung
+### Step-by-Step Guide
 
-1. **Repository klonen oder herunterladen**
+1. **Clone or download repository**
    ```bash
-   git clone https://github.com/iamrealguexoxo/DeadManSwitch.git
-   cd DeadManSwitch
+   git clone https://github.com/iamrealguexoxo/DeadMan.git
+   cd DeadMan
    ```
 
-2. **Installation durchführen**
-   - Rechtsklick auf `install.bat`
-   - "Als Administrator ausführen" wählen
-   - Das Script erstellt:
-     - Zwei Windows Scheduled Tasks
-     - Ordnerstruktur (config/, logs/)
-     - Initiale last_login.txt
+2. **Run installation**
+   - Right-click on `install.bat`
+   - Select "Run as administrator"
+   - The script will create:
+     - Two Windows Scheduled Tasks
+     - Folder structure (config/, logs/)
+     - Initial last_login.txt
 
-3. **Konfiguration**
-   - Starte `start.bat` (Doppelklick)
-   - Das Control Panel öffnet sich
+3. **Configuration**
+   - Run `start.bat` (double-click)
+   - The Control Panel will open
 
-## 🎮 Verwendung
+## 🎮 Usage
 
-### Erstkonfiguration
+### Initial Configuration
 
-1. **Control Panel starten**: `start.bat` ausführen
-2. **Tage einstellen**: Anzahl der Tage ohne Login (Standard: 30)
-3. **Safe Mode**: ⚠️ **AKTIVIERT LASSEN** für Tests!
-4. **Items hinzufügen**:
-   - **Plain Data**: Normale Dateien und Ordner
-   - **VeraCrypt**: Verschlüsselte Container und Keyfiles
-   - **BitLocker**: Laufwerke (löscht Recovery Keys)
-5. **Konfiguration speichern**: "Save Configuration" klicken
+1. **Start Control Panel**: Run `start.bat`
+2. **Set days**: Number of days without login (default: 30)
+3. **Safe Mode**: ⚠️ **KEEP ENABLED** for testing!
+4. **Add items**:
+   - **Plain Data**: Regular files and folders
+   - **VeraCrypt**: Encrypted containers and keyfiles
+   - **BitLocker**: Drives (deletes recovery keys only)
+5. **Save Configuration**: Click "Save Configuration"
 
-### Tabs im Control Panel
+### Tabs in Control Panel
 
 #### 📄 Plain Data
-- **Add Folder...**: Ordner hinzufügen, der komplett gelöscht wird
-- **Add File...**: Einzelne Dateien zum Löschen
-- **Remove Selected**: Ausgewählten Eintrag entfernen
+- **Add Folder...**: Add folder to be deleted completely
+- **Add File...**: Add individual files for deletion
+- **Remove Selected**: Remove selected entry
 
 #### 🔐 VeraCrypt
-- **Add Container...**: VeraCrypt Container (.hc, .vc)
-- **Add Keyfile...**: Keyfile-Dateien
-- Werden beim Trigger gelöscht
+- **Add Container...**: VeraCrypt containers (.hc, .vc)
+- **Add Keyfile...**: Keyfile files
+- Will be deleted when triggered
 
 #### 💾 BitLocker
-- **Laufwerk**: Buchstabe eingeben (z.B. D:)
-- **Add Volume**: Laufwerk hinzufügen
-- Löscht nur die Recovery Keys, nicht die Daten!
+- **Drive**: Enter drive letter (e.g., D:)
+- **Add Volume**: Add drive
+- Only deletes recovery keys, not the data!
 
-### Safe Mode testen
+### Testing in Safe Mode
 
-1. Konfiguriere das System mit **Safe Mode aktiviert**
-2. Teste manuell (als Administrator):
+1. Configure the system with **Safe Mode enabled**
+2. Manual test (as Administrator):
    ```powershell
    cd C:\DeadMan
    .\scripts\selfdestruct-check.ps1 -ForceSafeMode
    ```
-3. Prüfe die Logs:
+3. Check logs:
    ```powershell
    Get-Content .\logs\log.txt -Tail 50
    ```
-4. Im Safe Mode wird **nichts gelöscht**, nur simuliert!
+4. In Safe Mode, **nothing is deleted**, only simulated!
 
-### ⚠️ Safe Mode deaktivieren
+### ⚠️ Disabling Safe Mode
 
-**NUR NACH GRÜNDLICHEM TESTEN!**
+**ONLY AFTER THOROUGH TESTING!**
 
-1. Control Panel öffnen (`start.bat`)
-2. Haken bei "Safe Mode (Simulation nur)" entfernen
-3. "Save Configuration" klicken
-4. ⚠️ **System ist jetzt SCHARF!**
+1. Open Control Panel (`start.bat`)
+2. Uncheck "Safe Mode (Simulation nur)"
+3. Click "Save Configuration"
+4. ⚠️ **System is now LIVE!**
 
-## ⚙️ Wie funktioniert es?
+## ⚙️ How It Works
 
 ### Scheduled Tasks
 
-Nach der Installation laufen zwei Windows Tasks:
+After installation, two Windows tasks run:
 
 #### 1. DeadMan-UpdateLastLogin
-- **Trigger**: Bei jedem User-Login
-- **Aktion**: Aktualisiert `config\last_login.txt` mit aktuellem Datum
-- **Rechte**: User-Level
+- **Trigger**: On every user login
+- **Action**: Updates `config\last_login.txt` with current date
+- **Permissions**: User-level
 
 #### 2. DeadMan-SelfDestructCheck
-- **Trigger**: Bei jedem Windows-Start
-- **Aktion**: Prüft ob Schwelle überschritten → führt ggf. Löschung aus
-- **Rechte**: SYSTEM (höchste Rechte für Löschoperationen)
+- **Trigger**: On every Windows startup
+- **Action**: Checks if threshold exceeded → executes deletion if necessary
+- **Permissions**: SYSTEM (highest privileges for deletion operations)
 
-### Ablauf
+### Workflow
 
 ```
-1. Windows startet
+1. Windows starts
    ↓
-2. Task "SelfDestructCheck" läuft
+2. Task "SelfDestructCheck" runs
    ↓
-3. Liest last_login.txt
+3. Reads last_login.txt
    ↓
-4. Berechnet Differenz zu heute
+4. Calculates difference to today
    ↓
-5. Wenn Tage >= Schwellenwert:
+5. If days >= threshold:
    ├─ Safe Mode: Simulation → Log
-   └─ Live Mode: ECHTE LÖSCHUNG!
+   └─ Live Mode: REAL DELETION!
 ```
 
-## 📝 Konfigurationsdatei
+## 📝 Configuration File
 
 `config/config.json`:
 ```json
@@ -183,126 +203,151 @@ Nach der Installation laufen zwei Windows Tasks:
 }
 ```
 
-## 🗑️ Lösch-Modi
+## 🗑️ Deletion Modes
 
-| Typ | Beschreibung | Aktion |
-|-----|--------------|--------|
-| `PlainFolder` | Normaler Ordner | Löscht Ordner + Inhalt rekursiv |
-| `PlainFile` | Normale Datei | Löscht Datei |
-| `VeraCryptContainer` | Verschlüsselter Container | Löscht Container-Datei |
-| `VeraCryptKeyfile` | VeraCrypt Keyfile | Löscht Keyfile |
-| `BitLockerVolume` | BitLocker Laufwerk | Löscht alle Recovery Keys |
+| Type | Description | Action |
+|------|-------------|--------|
+| `PlainFolder` | Regular folder | Deletes folder + contents recursively |
+| `PlainFile` | Regular file | Deletes file |
+| `VeraCryptContainer` | Encrypted container | Deletes container file |
+| `VeraCryptKeyfile` | VeraCrypt keyfile | Deletes keyfile |
+| `BitLockerVolume` | BitLocker drive | Deletes all recovery keys |
 
-## 🔧 Manuelle Operationen
+## 🔧 Manual Operations
 
-### Tasks anzeigen
+### View Tasks
 ```powershell
 # PowerShell
 Get-ScheduledTask | Where-Object { $_.TaskName -like "DeadMan*" }
 
-# Oder Aufgabenplanung öffnen
+# Or open Task Scheduler
 taskschd.msc
 ```
-Tasks sind in der **Root-Ebene** der Aufgabenplanungsbibliothek!
+Tasks are in the **Root level** of Task Scheduler Library!
 
-### Manueller Test (Safe Mode)
+### Manual Test (Safe Mode)
 ```powershell
-# Als Administrator
+# As Administrator
 cd C:\DeadMan
 .\scripts\selfdestruct-check.ps1 -ForceSafeMode
 ```
 
-### Letzten Login prüfen
+### Check Last Login
 ```powershell
 Get-Content C:\DeadMan\config\last_login.txt
 ```
 
-### Logs ansehen
+### View Logs
 ```powershell
 Get-Content C:\DeadMan\logs\log.txt -Tail 50
 ```
 
-### Config bearbeiten
+### Edit Config
 ```powershell
 notepad C:\DeadMan\config\config.json
 ```
 
-## 🛡️ Sicherheitshinweise
-
-- **Speicherort**: Tool an einem Ort aufbewahren, auf den nur DU Zugriff hast
-- **Verschlüsselung**: Nutze Full-Disk-Encryption (BitLocker/VeraCrypt)
-- **Config-Datei**: Enthält Pfade zu sensiblen Daten - schützen!
-- **Admin-Zugriff**: Überlege, was passiert wenn jemand Admin-Rechte erlangt
-- **Testen!**: Immer im Safe Mode testen bevor du scharf schaltest!
-- **Backups**: Erstelle Backups wichtiger Daten an sicheren Orten
-
-## ⚡ Deinstallation
-
-### Via PowerShell (als Administrator)
+### Create Desktop Shortcut
 ```powershell
-# Tasks löschen
+.\create-shortcut.ps1
+```
+
+## 🛡️ Security Considerations
+
+- **Storage Location**: Keep this tool in a location only YOU can access
+- **Encryption**: Use full-disk encryption (BitLocker/VeraCrypt) for maximum security
+- **Config File**: Contains paths to sensitive data - protect it!
+- **Admin Access**: Consider what happens if someone gains admin rights
+- **Test Thoroughly**: Always test in Safe Mode before going live!
+- **Backups**: Create backups of important data in secure locations
+- **Plausible Deniability**: Safe Mode logs look convincing but don't actually delete
+
+## 💡 Paranoia Tips
+
+- **Multiple Layers**: Use this with full-disk encryption
+- **Hidden Installation**: Install to a non-obvious location
+- **Decoy Data**: Keep some "interesting" decoy files to make discovery less likely
+- **Time-Delayed**: Set to 7-14 days for travel/emergencies
+- **Test Runs**: Periodically test in Safe Mode to ensure it works
+- **No Traces**: Consider what logs this leaves (Windows Event Log, etc.)
+- **Offline Backups**: Keep important data on air-gapped offline storage
+
+## ⚡ Uninstallation
+
+### Via PowerShell (as Administrator)
+```powershell
+# Delete tasks
 Unregister-ScheduledTask -TaskName "DeadMan-UpdateLastLogin" -Confirm:$false
 Unregister-ScheduledTask -TaskName "DeadMan-SelfDestructCheck" -Confirm:$false
 
-# Ordner löschen
+# Delete folder
 Remove-Item -Path "C:\DeadMan" -Recurse -Force
 ```
 
-### Manuell
-1. Öffne Aufgabenplanung (`taskschd.msc`)
-2. Lösche beide Tasks:
+### Manual
+1. Open Task Scheduler (`taskschd.msc`)
+2. Delete both tasks:
    - `DeadMan-UpdateLastLogin`
    - `DeadMan-SelfDestructCheck`
-3. Lösche den `C:\DeadMan` Ordner
+3. Delete the `C:\DeadMan` folder
 
 ## 🐛 Troubleshooting
 
-### Task läuft nicht
-- Prüfe Aufgabenplanung auf Fehler
-- Stelle sicher, dass Skript-Pfade korrekt sind
-- Führe PowerShell als Administrator aus
+### Task doesn't run
+- Check Task Scheduler for errors
+- Ensure script paths are correct
+- Run PowerShell as Administrator
 
-### GUI startet nicht
-- Prüfe PowerShell Execution Policy:
+### GUI doesn't start
+- Check PowerShell Execution Policy:
   ```powershell
   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
-- Rechtsklick auf `start.bat` → "Als Administrator ausführen"
+- Right-click `start.bat` → "Run as administrator"
 
-### Logs sind leer
-- Stelle sicher, dass `logs/` Ordner existiert
-- Prüfe Schreibrechte
-- Führe Scripts als Administrator aus
+### Logs are empty
+- Ensure `logs/` folder exists
+- Check write permissions
+- Run scripts as Administrator
 
-### About-Dialog zeigt kein GIF
-- Stelle sicher, dass `bart.gif` im Root-Verzeichnis liegt
-- Prüfe, ob die Datei beschädigt ist
-- Fallback: ASCII-Art Bart wird angezeigt
+### About dialog shows no GIF
+- Ensure `bart.gif` is in root directory
+- Check if file is corrupted
+- Fallback: ASCII-Art Bart will be displayed
 
-## 📜 Lizenz
+## 📜 License
 
-MIT License - Benutzung auf eigene Gefahr!
+MIT License - Use at your own risk!
 
 ## 🙏 Credits
 
-- **Creator**: [iamrealguexoxo](https://github.com/iamrealguexoxo) 🎭
-- **Inspiration**: BartsTOK und andere Projekte
-- **Tanzender Bart**: Die Simpsons © Fox
+- **Created by**: [iamrealguexoxo](https://github.com/iamrealguexoxo) 🎭
+- **Inspiration**: BartsTOK and other projects
+- **Dancing Bart**: The Simpsons © Fox
 
-## 🤝 Mitwirken
+## 🤝 Contributing
 
-Contributions sind willkommen! Bitte:
-1. Teste gründlich
-2. Behalte Safe Mode als Standard
-3. Dokumentiere alle Änderungen
-4. Bedenke Sicherheitsaspekte
+Contributions are welcome! Please:
+1. Test thoroughly
+2. Keep Safe Mode as default
+3. Document all changes
+4. Consider security implications
 
-## ⚠️ Haftungsausschluss
+## ⚠️ Legal Disclaimer
 
-Dieses Tool wird ohne jegliche Garantie bereitgestellt. Die Autoren sind nicht verantwortlich für Datenverlust oder Schäden. Teste immer im Safe Mode und erstelle Backups wichtiger Daten. Nutze es verantwortungsvoll und legal.
+This tool is provided as-is without any warranty. The authors are not responsible for data loss or damage. Always test in Safe Mode and create backups of important data. Use responsibly and legally.
+
+**This tool is for legitimate privacy and security purposes only.** Users are responsible for compliance with applicable laws.
 
 ---
 
-**Viel Spaß mit dem Dead Man Switch!** 💀🕺
+**Enjoy Dead Man!** 💀🕺
 
-*Denk dran: Mit großer Macht kommt große Verantwortung. Oder so ähnlich...* 😎
+*Remember: With great power comes great responsibility. Or something like that...* 😎
+
+---
+
+## 🌍 Languages
+
+- **English**: This file
+- **Deutsch**: [README_DE.md](README_DE.md)

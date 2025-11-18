@@ -17,7 +17,7 @@ config.json
 screenshot_*.png
 screenshot_*.jpg
 
-# Windows shortcuts
+# Windows shortcuts (nicht hochladen - werden lokal per Script erstellt)
 *.lnk
 
 # Backup files

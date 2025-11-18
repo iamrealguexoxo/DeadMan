@@ -5,7 +5,7 @@ REM ===================================================================
 REM Installs and configures the Dead Man Switch system
 REM ===================================================================
 
-title Dead Man Switch - Installation
+title Dead Man - Installation by iamrealguexoxo
 
 REM Check for Administrator privileges
 net session >nul 2>&1
