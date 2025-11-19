@@ -5,7 +5,12 @@
 
 Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer bestimmten Anzahl von Tagen ohne Login ausgelöst wird.
 
-**✨ NEU in v1.1:** Jetzt mit `DeadMan.exe` Launcher - einfach doppelklicken!
+**✨ NEU in v1.1:**
+- 🚀 **Smart Launcher (`DeadMan.exe`)** - Interaktives Menü mit Auto-Installation
+- 🔄 **Update Checker** - Vergleiche lokale Version mit GitHub Releases
+- 💾 **Config Backup/Restore** - Speichere und stelle Konfiguration wieder her
+- 📂 **Eigener Installations-Pfad** - Wähle, wo Dead Man installiert wird
+- 🛡️ **Erweiterte Sicherheit** - Gehärtete Validierung und Fehlerbehandlung
 
 ![Dead Man Control Panel](media/screenshot.png)
 
@@ -22,6 +27,7 @@ Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer best
 
 ## 🎯 Features
 
+### Basis-Features
 - **Automatischer Trigger**: Aktiviert sich nach X Tagen ohne Login
 - **Safe Mode**: Teste das System ohne tatsächliche Löschung (Simulation)
 - **Mehrere Lösch-Typen**:
@@ -30,6 +36,13 @@ Ein Windows-basiertes automatisches Datenvernichtungssystem, das nach einer best
   - BitLocker Recovery Keys
 - **GUI Control Panel**: Einfach zu bedienende Konfigurationsoberfläche
 - **Windows Tasks**: Automatische Überwachung bei Systemstart und Login
+
+### v1.1 Features
+- **Smart Launcher Menü**: Interaktives Menü mit Installations-Erkennung
+- **Auto-Update Checker**: Vergleiche deine Version mit neuesten GitHub Releases
+- **Config Backup/Restore**: Exportiere und importiere Konfiguration mit Validierung
+- **Eigener Installations-Pfad**: Installiere überall, nicht nur C:\DeadMan
+- **Erweiterte Sicherheit**: Umfassende Input-Validierung und Fehlerbehandlung
 - **About-Dialog**: Mit tanzenden Bart! 🕺
 
 ## 📁 Projektstruktur

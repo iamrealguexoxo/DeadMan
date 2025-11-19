@@ -47,7 +47,7 @@ Write-Host "  - Desktop shortcut" -ForegroundColor Gray
 Write-Host "  - Configuration files (optional)" -ForegroundColor Gray
 Write-Host ""
 
-$confirm = Read-Host "Are you sure you want to continue? (YES/no)"
+$confirm = (Read-Host "Are you sure you want to continue? (YES/no)").Trim().ToUpperInvariant()
 if ($confirm -ne "YES") {
     Write-Status "Uninstallation cancelled." "Yellow"
     pause
@@ -100,32 +100,81 @@ if (Test-Path $shortcutPath) {
 Write-Host ""
 
 # Remove Installation Folder (Optional)
-$installPath = Split-Path -Parent $PSScriptRoot
-if (-not $installPath -or $installPath -eq "") {
-    $installPath = "C:\DeadMan"
+# Attempt to resolve installation path safely
+$installPath = $null
+
+# Try $PSScriptRoot first (when running as script)
+if ($PSScriptRoot -and $PSScriptRoot -ne "") {
+    $installPath = Split-Path -Parent $PSScriptRoot
 }
 
+# Try $MyInvocation.MyCommand.Path as fallback
+if (-not $installPath -or $installPath -eq "") {
+    if ($MyInvocation.MyCommand.Path) {
+        $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+        if ($scriptPath) {
+            $installPath = Split-Path -Parent $scriptPath
+        }
+    }
+}
+
+# Validate the resolved path exists and looks like a DeadMan installation
+$isValidInstallPath = $false
+if ($installPath -and (Test-Path $installPath)) {
+    # Check for expected DeadMan files/folders
+    $deadManExe = Join-Path $installPath "DeadMan.exe"
+    $scriptsFolder = Join-Path $installPath "scripts"
+    
+    if ((Test-Path $deadManExe) -or (Test-Path $scriptsFolder)) {
+        $isValidInstallPath = $true
+    }
+}
+
+# If we cannot safely resolve the path, abort
+if (-not $isValidInstallPath) {
+    Write-Host ""
+    Write-Status "ERROR: Cannot safely determine installation path" "Red"
+    Write-Host ""
+    Write-Host "The uninstaller could not locate the Dead Man installation folder." -ForegroundColor Yellow
+    Write-Host "Please manually delete the installation folder if needed." -ForegroundColor Yellow
+    Write-Host ""
+    if ($installPath) {
+        Write-Host "Attempted path: $installPath (validation failed)" -ForegroundColor Gray
+    } else {
+        Write-Host "Could not determine installation path" -ForegroundColor Gray
+    }
+    Write-Host ""
+    Write-Status "Tasks and shortcuts have been removed. Installation folder remains intact." "Yellow"
+    pause
+    exit 0
+}
 Write-Host "Installation folder: $installPath" -ForegroundColor White
 Write-Host ""
 Write-Host "WARNING: Do you want to DELETE the entire installation folder?" -ForegroundColor Yellow
 Write-Host "         This will remove ALL configuration and log files!" -ForegroundColor Yellow
 Write-Host ""
 
-$removeFolder = Read-Host "Delete installation folder? (yes/NO)"
-if ($removeFolder -eq "yes") {
-    Write-Host ""
-    Write-Status "Removing installation folder..." "Cyan"
-    
-    try {
-        Remove-Item $installPath -Recurse -Force
-        Write-Status "Installation folder deleted" "Green"
-    } catch {
-        Write-Status "Error removing folder" "Red"
-        Write-Status $_.Exception.Message "Red"
-    }
-} else {
-    Write-Status "Installation folder kept at: $installPath" "Yellow"
+# Additional confirmation showing exact path
+$confirmPath = Read-Host "Type the folder name to confirm (e.g., 'DeadMan')"
+$expectedFolderName = Split-Path $installPath -Leaf
+
+if (-not $confirmPath.Trim().Equals($expectedFolderName, [StringComparison]::OrdinalIgnoreCase)) {
+    Write-Status "Folder name does not match. Installation folder kept for safety." "Yellow"
     Write-Status "You can manually delete it later if needed." "Gray"
+    pause
+    exit 0
+}
+
+Write-Host ""
+Write-Status "Removing installation folder..." "Cyan"
+
+try {
+    Remove-Item $installPath -Recurse -Force
+    Write-Status "Installation folder deleted" "Green"
+} catch {
+    Write-Status "Error: Cannot delete folder while script is running from it" "Red"
+    Write-Status "Please manually delete: $installPath" "Yellow"
+    Write-Status "Original error: $($_.Exception.Message)" "Gray"
 }
 
 # Summary
@@ -134,12 +183,6 @@ Write-Host "========================================" -ForegroundColor Green
 Write-Host "  UNINSTALLATION COMPLETE" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Write-Host ""
-
-if ($removeFolder -ne "yes") {
-    Write-Status "Installation files still at: $installPath" "Yellow"
-    Write-Host ""
-}
-
 Write-Status "Dead Man has been removed from your system." "White"
 Write-Host ""
 

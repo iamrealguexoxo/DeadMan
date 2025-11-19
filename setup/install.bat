@@ -28,7 +28,7 @@ cd /d "%~dp0"
 
 REM Run the setup script
 echo Running setup tasks...
-powershell.exe -ExecutionPolicy Bypass -File "%~dp0scripts\setup-tasks.ps1"
+powershell.exe -ExecutionPolicy Bypass -File "%~dp0..\scripts\setup-tasks.ps1"
 
 if %errorlevel% equ 0 (
     echo.

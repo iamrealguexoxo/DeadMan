@@ -5,7 +5,12 @@
 
 A Windows-based automatic data destruction system that triggers after X days without login.
 
-**✨ NEW in v1.1:** Now includes `DeadMan.exe` launcher - just double-click to start!
+**✨ NEW in v1.1:**
+- 🚀 **Smart Launcher (`DeadMan.exe`)** - Interactive menu with auto-installation
+- 🔄 **Update Checker** - Compare local version with GitHub releases
+- 💾 **Config Backup/Restore** - Save and restore your configuration
+- 📂 **Custom Install Path** - Choose where to install Dead Man
+- 🛡️ **Enhanced Security** - Hardened validation and error handling
 
 ![Dead Man Control Panel](media/screenshot.png)
 
@@ -22,6 +27,7 @@ A Windows-based automatic data destruction system that triggers after X days wit
 
 ## 🎯 Features
 
+### Core Features
 - **Automatic Trigger**: Activates after X days without login
 - **Safe Mode**: Test the system without actual deletion (simulation)
 - **Multiple Deletion Types**:
@@ -30,6 +36,13 @@ A Windows-based automatic data destruction system that triggers after X days wit
   - BitLocker recovery keys
 - **GUI Control Panel**: Easy-to-use configuration interface
 - **Windows Tasks**: Automatic monitoring on system startup and login
+
+### v1.1 Features
+- **Smart Launcher Menu**: Interactive menu with installation detection
+- **Auto-Update Checker**: Compare your version with latest GitHub releases
+- **Config Backup/Restore**: Export and import your configuration with validation
+- **Custom Installation Path**: Install anywhere, not just C:\DeadMan
+- **Enhanced Security**: Comprehensive input validation and error handling
 - **About Dialog**: With dancing Bart! 🕺
 
 ## 🕵️ Who is this for?

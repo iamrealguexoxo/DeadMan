@@ -99,8 +99,13 @@ if ($InstallPath -ne $currentDir) {
     }
     
     Write-Status "Creating installation directory..." "Cyan"
-    New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
-    
+    try {
+        New-Item -ItemType Directory -Path $InstallPath -Force -ErrorAction Stop | Out-Null
+    } catch {
+        Write-Status "Failed to create installation directory: $($_.Exception.Message)" "Red"
+        pause
+        exit 1
+    }    
     Write-Status "Copying files..." "Cyan"
     
     # Determine parent directory (where DeadMan.exe is)
@@ -118,20 +123,74 @@ if ($InstallPath -ne $currentDir) {
         "setup"
     )
     
+    $copyErrors = @()
     foreach ($item in $filesToCopy) {
         $sourcePath = Join-Path $parentDir $item
         if (Test-Path $sourcePath) {
-            Copy-Item -Path $sourcePath -Destination $InstallPath -Recurse -Force
-            Write-Status "  ✓ $item" "Gray"
+            try {
+                Copy-Item -Path $sourcePath -Destination $InstallPath -Recurse -Force -ErrorAction Stop
+                Write-Status "  $item" "Gray"
+            } catch {
+                $errorMsg = "Failed to copy $item : $($_.Exception.Message)"
+                Write-Status "  $errorMsg" "Red"
+                $copyErrors += $errorMsg
+            }
+        } else {
+            $errorMsg = "$item not found at source location"
+            Write-Status "  $errorMsg" "Yellow"
+            $copyErrors += $errorMsg
         }
     }
     
     Write-Host ""
+    
+    # Verify critical files exist in installation directory
+    $criticalFiles = @("DeadMan.exe", "DeadMan.ps1", "scripts", "setup")
+    $missingFiles = @()
+    
+    foreach ($file in $criticalFiles) {
+        $filePath = Join-Path $InstallPath $file
+        if (-not (Test-Path $filePath)) {
+            $missingFiles += $file
+        }
+    }
+    
+    if ($missingFiles.Count -gt 0 -or $copyErrors.Count -gt 0) {
+        Write-Status "Installation failed!" "Red"
+        if ($missingFiles.Count -gt 0) {
+            Write-Status "Missing critical files: $($missingFiles -join ', ')" "Red"
+        }
+        if ($copyErrors.Count -gt 0) {
+            Write-Status "Copy errors occurred: $($copyErrors.Count) error(s)" "Red"
+        }
+        Write-Status "Cleaning up partial installation..." "Yellow"
+        Remove-Item $InstallPath -Recurse -Force -ErrorAction SilentlyContinue
+        pause
+        exit 1
+    }    
     Write-Status "Files copied successfully!" "Green"
 } else {
     Write-Status "Already in installation directory" "Green"
+    
+    # Verify critical files exist even for in-place installation
+    $criticalFiles = @("DeadMan.exe", "DeadMan.ps1", "scripts", "setup")
+    $missingFiles = @()
+    
+    foreach ($file in $criticalFiles) {
+        $filePath = Join-Path $InstallPath $file
+        if (-not (Test-Path $filePath)) {
+            $missingFiles += $file
+        }
+    }
+    
+    if ($missingFiles.Count -gt 0) {
+        Write-Status "Installation validation failed!" "Red"
+        Write-Status "Missing critical files: $($missingFiles -join ', ')" "Red"
+        Write-Status "Please extract the complete package and try again." "Yellow"
+        pause
+        exit 1
+    }
 }
-
 Write-Host ""
 
 # ===================================================================
