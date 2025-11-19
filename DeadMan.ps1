@@ -23,7 +23,8 @@ else {
     Write-Host "  [2] Install Tasks (Admin required)" -ForegroundColor White
     Write-Host "  [3] Check for Updates" -ForegroundColor White
     Write-Host "  [4] Backup/Restore Config" -ForegroundColor White
-    Write-Host "  [5] Exit" -ForegroundColor White
+    Write-Host "  [5] Create Desktop Shortcut" -ForegroundColor White
+    Write-Host "  [6] Exit" -ForegroundColor White
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host ""
@@ -43,6 +44,29 @@ else {
         & "$root\setup\config-backup.ps1"
     }
     elseif ($choice -eq "5") {
+        Write-Host ""
+        Write-Host "Creating desktop shortcut..." -ForegroundColor Cyan
+        $desktopPath = [Environment]::GetFolderPath("Desktop")
+        $shortcutPath = Join-Path $desktopPath "Dead Man.lnk"
+        $targetPath = Join-Path $root "DeadMan.exe"
+        
+        $shell = New-Object -ComObject WScript.Shell
+        $shortcut = $shell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = $targetPath
+        $shortcut.WorkingDirectory = $root
+        $shortcut.Description = "Dead Man - Automatic Data Destruction System"
+        $shortcut.IconLocation = $targetPath
+        $shortcut.Save()
+        
+        if (Test-Path $shortcutPath) {
+            Write-Host "Desktop shortcut created successfully!" -ForegroundColor Green
+        } else {
+            Write-Host "Failed to create desktop shortcut!" -ForegroundColor Red
+        }
+        Write-Host ""
+        pause
+    }
+    elseif ($choice -eq "6") {
         exit
     }
     else {
