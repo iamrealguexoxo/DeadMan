@@ -21,7 +21,9 @@ else {
     Write-Host ""
     Write-Host "  [1] Launch GUI" -ForegroundColor White
     Write-Host "  [2] Install Tasks (Admin required)" -ForegroundColor White
-    Write-Host "  [3] Exit" -ForegroundColor White
+    Write-Host "  [3] Check for Updates" -ForegroundColor White
+    Write-Host "  [4] Backup/Restore Config" -ForegroundColor White
+    Write-Host "  [5] Exit" -ForegroundColor White
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host ""
@@ -35,6 +37,12 @@ else {
         & "$root\scripts\setup-tasks.ps1" 
     }
     elseif ($choice -eq "3") {
+        & "$root\setup\check-updates.ps1"
+    }
+    elseif ($choice -eq "4") {
+        & "$root\setup\config-backup.ps1"
+    }
+    elseif ($choice -eq "5") {
         exit
     }
     else {

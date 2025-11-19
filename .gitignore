@@ -12,6 +12,9 @@ logs/
 release/
 *.zip
 
+# Development and AI context
+dev/
+
 # User-specific files
 last_login.txt
 log.txt

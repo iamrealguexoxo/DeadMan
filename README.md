@@ -58,14 +58,24 @@ DeadMan/
 ├── media/                # Media files
 │   ├── bart.gif          # Our dancing Bart! 🎭
 │   └── screenshot.png    # GUI screenshot
-├── release/              # Release builds (not in repo)
-│   └── DeadMan-v1.1.zip
 ├── scripts/              # PowerShell scripts
 │   ├── gui-config.ps1
 │   ├── setup-tasks.ps1
 │   ├── selfdestruct-check.ps1
 │   └── update-last-login.ps1
-├── DeadMan.exe           # ⭐ Main launcher (double-click!)
+├── setup/                # Installation & utility scripts
+│   ├── installer.ps1
+│   ├── uninstaller.ps1
+│   ├── check-updates.ps1
+│   ├── config-backup.ps1
+│   ├── install.bat
+│   ├── start.bat
+│   └── create-shortcut.ps1
+├── run.bat               # ⭐ Smart launcher (auto-install + start)
+├── uninstall.bat         # Uninstaller
+├── check-updates.bat     # Update checker
+├── backup-config.bat     # Config backup/restore
+├── DeadMan.exe           # Main launcher executable
 ├── DeadMan.ps1           # PowerShell launcher
 ├── .gitignore
 ├── LICENSE
@@ -85,38 +95,49 @@ DeadMan/
    - Download `DeadMan-v1.1-Installer.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
    - Extract to any folder
 
-2. **Run installer**
-   - Double-click **`install.bat`**
-   - The installer will:
-     - ✅ Copy all files to `C:\DeadMan`
-     - ✅ Create desktop shortcut "Dead Man"
-     - ✅ Optionally install Windows Tasks
+2. **Double-click `run.bat`**
+   - That's it! The script will:
+     - ✅ Check if already installed
+     - ✅ If not: Auto-install to `C:\DeadMan` + create desktop shortcut
+     - ✅ If yes: Launch directly
    
-3. **Start using**
-   - Double-click **"Dead Man"** on your Desktop
-   - Select **[1] GUI** to configure
+3. **Configure**
+   - Select **[1] GUI** from menu
+   - Add items and test in Safe Mode!
 
 ### Manual Installation (Advanced)
 
-**Option A: Clone from GitHub**
+**Clone from GitHub:**
 ```bash
 git clone https://github.com/iamrealguexoxo/DeadMan.git C:\DeadMan
 cd C:\DeadMan
 ```
 
-**Option B: Download ZIP**
-- Download `DeadMan-v1.1.zip` from [Releases](https://github.com/iamrealguexoxo/DeadMan/releases)
-- Extract to `C:\DeadMan`
-
-**Install Windows Tasks:**
-- Double-click `DeadMan.exe` → Select **[2] Install**
-- OR right-click `install.bat` → "Run as administrator"
-
-**Create Desktop Shortcut:**
-- Right-click `create-shortcut.ps1` → "Run with PowerShell"
+**Install:**
+- Double-click `run.bat` (auto-detects and installs)
+- OR: `setup\install.bat` for manual installation
 
 **Launch:**
-- Double-click `DeadMan.exe` or `start.bat`
+- Double-click `run.bat` or `DeadMan.exe`
+
+### Additional Tools
+
+**Update Checker:**
+- Double-click **`check-updates.bat`** or select [3] from menu
+- Compares local version with latest GitHub release
+- Opens release page if update available
+
+**Config Backup/Restore:**
+- Double-click **`backup-config.bat`** or select [4] from menu
+- **Backup**: Exports configuration to Documents folder
+- **Restore**: Imports configuration from backup file
+- Useful before reinstalling or testing
+
+### Uninstallation
+
+- Double-click **`uninstall.bat`**
+- Removes Windows Tasks and desktop shortcut
+- Optionally deletes installation folder
 
 ## 🎮 Usage
 

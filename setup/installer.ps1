@@ -68,8 +68,20 @@ Write-Status "Running as Administrator ✓" "Green"
 Write-Host ""
 
 # ===================================================================
-# Installation Path
+# Installation Path Selection
 # ===================================================================
+Write-Host "Default installation path: $InstallPath" -ForegroundColor White
+$customPath = Read-Host "Press ENTER to use default, or type custom path"
+
+if ($customPath -ne "") {
+    $InstallPath = $customPath.Trim('"')
+    if (-not [System.IO.Path]::IsPathRooted($InstallPath)) {
+        Write-Status "Error: Please provide absolute path (e.g., C:\MyFolder)" "Red"
+        pause
+        exit
+    }
+}
+
 Write-Status "Installation path: $InstallPath" "Cyan"
 Write-Host ""
 
@@ -90,21 +102,24 @@ if ($InstallPath -ne $currentDir) {
     New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
     
     Write-Status "Copying files..." "Cyan"
+    
+    # Determine parent directory (where DeadMan.exe is)
+    $parentDir = Split-Path -Parent $currentDir
+    
     $filesToCopy = @(
         "DeadMan.exe",
         "DeadMan.ps1",
-        "install.bat",
-        "start.bat",
-        "create-shortcut.ps1",
+        "run.bat",
         "LICENSE",
         "README.md",
         "README_DE.md",
         "scripts",
-        "media"
+        "media",
+        "setup"
     )
     
     foreach ($item in $filesToCopy) {
-        $sourcePath = Join-Path $currentDir $item
+        $sourcePath = Join-Path $parentDir $item
         if (Test-Path $sourcePath) {
             Copy-Item -Path $sourcePath -Destination $InstallPath -Recurse -Force
             Write-Status "  ✓ $item" "Gray"
