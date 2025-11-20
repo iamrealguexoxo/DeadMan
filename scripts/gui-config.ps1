@@ -258,7 +258,7 @@ function Show-AboutDialog {
     
     # Version
     $lblVersion = New-Object System.Windows.Forms.Label
-    $lblVersion.Text = "Version 1.1 - GitHub Edition"
+    $lblVersion.Text = "Version 1.2 - Stability Update"
     $lblVersion.Font = New-Object System.Drawing.Font("Segoe UI", 10)
     $lblVersion.ForeColor = [System.Drawing.Color]::LightGray
     $lblVersion.Location = New-Object System.Drawing.Point(10, 45)

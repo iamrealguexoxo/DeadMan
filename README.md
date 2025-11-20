@@ -10,6 +10,7 @@ A Windows-based automatic data destruction system that triggers after X days wit
 - 🧹 **Auto Config Cleanup** - Deleted items automatically removed from config
 - ⏱️ **Optimized Task Delays** - Prevents race conditions (10s startup, 3min login)
 - 🐛 **GUI Bug Fixes** - Fixed null reference errors with PlainFile items
+- 🔄 **Menu Loop** - DeadMan.exe menu returns after each action instead of closing
 
 **v1.1 Features:**
 - 🚀 **Smart Launcher (`DeadMan.exe`)** - Interactive menu with auto-installation
@@ -393,6 +394,7 @@ Remove-Item -Path "C:\DeadMan" -Recurse -Force
 - Fixed: SelfDestructCheck scheduled task now runs reliably on system startup
 - Fixed: GUI null reference error when loading PlainFile items
 - Fixed: Task timing race condition with optimized delays (10s startup, 3min login)
+- Fixed: Menu loop - DeadMan.exe returns to menu after each action
 - Added: Automatic cleanup of deleted items from config.json
 - Improved: Task execution order to prevent date overwriting
 
