@@ -1,11 +1,17 @@
-# 💀 Dead Man v1.1 💀
+# 💀 Dead Man v1.2 💀
 
 > **For the truly paranoid among us** 🕵️  
 > *Because sometimes you need a fail-safe that doesn't require trust in anyone but yourself.*
 
 A Windows-based automatic data destruction system that triggers after X days without login.
 
-**✨ NEW in v1.1:**
+**✨ NEW in v1.2:**
+- 🔧 **Fixed Startup Trigger** - SelfDestructCheck now runs reliably on system startup
+- 🧹 **Auto Config Cleanup** - Deleted items automatically removed from config
+- ⏱️ **Optimized Task Delays** - Prevents race conditions (10s startup, 3min login)
+- 🐛 **GUI Bug Fixes** - Fixed null reference errors with PlainFile items
+
+**v1.1 Features:**
 - 🚀 **Smart Launcher (`DeadMan.exe`)** - Interactive menu with auto-installation
 - 🔄 **Update Checker** - Compare local version with GitHub releases
 - 💾 **Config Backup/Restore** - Save and restore your configuration
@@ -380,6 +386,28 @@ Remove-Item -Path "C:\DeadMan" -Recurse -Force
 - Ensure `bart.gif` is in root directory
 - Check if file is corrupted
 - Fallback: ASCII-Art Bart will be displayed
+
+## 📝 Changelog
+
+### v1.2 (2025-11-20)
+- Fixed: SelfDestructCheck scheduled task now runs reliably on system startup
+- Fixed: GUI null reference error when loading PlainFile items
+- Fixed: Task timing race condition with optimized delays (10s startup, 3min login)
+- Added: Automatic cleanup of deleted items from config.json
+- Improved: Task execution order to prevent date overwriting
+
+### v1.1 (2025-11-19)
+- Added: Smart Launcher with interactive menu
+- Added: Update checker for GitHub releases
+- Added: Config backup/restore functionality
+- Added: Custom installation path support
+- Enhanced: Security hardening across all scripts
+
+### v1.0 (Initial Release)
+- Core Dead Man Switch functionality
+- GUI configuration panel
+- Safe Mode simulation
+- Multiple deletion types support
 
 ## 📜 License
 

@@ -123,7 +123,9 @@ function Fill-ListView {
         if ($matches) {
             $lvItem = New-Object System.Windows.Forms.ListViewItem($type)
             $lvItem.SubItems.Add($item.Path) | Out-Null
-            $lvItem.SubItems.Add($item.DeleteMode) | Out-Null
+            # DeleteMode nur anzeigen wenn vorhanden
+            $deleteMode = if ($item.PSObject.Properties['DeleteMode']) { $item.DeleteMode } else { "" }
+            $lvItem.SubItems.Add($deleteMode) | Out-Null
             $lvItem.Tag = $item
             $listView.Items.Add($lvItem) | Out-Null
         }

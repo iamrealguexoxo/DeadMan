@@ -220,13 +220,40 @@ if ($effectiveSafeMode) {
 else {
     Write-Log "Live-Modus: $deletedCount Items gelöscht, $errorCount Fehler"
     
+    # Gelöschte Items aus Config entfernen
+    $remainingItems = @()
+    foreach ($item in $configJson.Items) {
+        $itemPath = $item.Path
+        $exists = $false
+        
+        if ($item.Type -eq "PlainFile") {
+            $exists = Test-Path $itemPath -PathType Leaf
+        }
+        elseif ($item.Type -eq "PlainFolder") {
+            $exists = Test-Path $itemPath -PathType Container
+        }
+        else {
+            # Andere Typen (VeraCrypt, BitLocker) behalten
+            $exists = $true
+        }
+        
+        if ($exists) {
+            $remainingItems += $item
+        }
+        else {
+            Write-Log "Item aus Config entfernt (nicht mehr vorhanden): $itemPath"
+        }
+    }
+    
     # Status in Config aktualisieren
+    $configJson.Items = $remainingItems
     $configJson.Executed = $true
     $configJson.ExecutedAt = (Get-Date).ToString("o")
     
     try {
         $configJson | ConvertTo-Json -Depth 5 | Set-Content $configPath -Force
         Write-Log "Config aktualisiert: Executed=true, ExecutedAt=$($configJson.ExecutedAt)"
+        Write-Log "Verbleibende Items in Config: $($remainingItems.Count)"
     }
     catch {
         Write-Log "FEHLER beim Speichern der Config: $_"

@@ -43,9 +43,10 @@ if ($existingTask1) {
 # Task Action erstellen
 $action1 = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath1`""
 
-# Trigger erstellen (bei Login des aktuellen Benutzers)
+# Trigger erstellen (bei Login des aktuellen Benutzers mit 3 Minuten Verzoegerung)
 $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $trigger1 = New-ScheduledTaskTrigger -AtLogOn -User $currentUser
+$trigger1.Delay = "PT3M"
 
 # Principal erstellen (laeuft mit Benutzerrechten)
 $principal1 = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Limited
@@ -89,8 +90,9 @@ if ($existingTask2) {
 # Task Action erstellen
 $action2 = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath2`""
 
-# Trigger erstellen (bei Systemstart)
+# Trigger erstellen (bei Systemstart mit 10 Sekunden Verzoegerung)
 $trigger2 = New-ScheduledTaskTrigger -AtStartup
+$trigger2.Delay = "PT10S"
 
 # Principal erstellen (laeuft als SYSTEM mit hoechsten Rechten)
 $principal2 = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
